@@ -3,8 +3,7 @@ import { memo } from "..";
 export async function getStaticProps() {
   // Call an external API endpoint to get data.
   // You can use any data fetching library
-  console.log("we retrieved JSON file from REST API at build time");
-  const data = memo(
+  const data = await memo(
     "countries",
     "https://raw.githubusercontent.com/alan-ws/random-json-store/main/country_iso.json"
   );
@@ -19,13 +18,13 @@ export async function getStaticProps() {
 }
 
 export default function Home({
-  countries,
+    data,
 }: {
-  countries: { name: string; code: string }[];
+    data: { name: string; code: string }[];
 }) {
   return (
     <div>
-      {countries.map((value: { name: string; code: string }, index: number) => {
+      {data.map((value: { name: string; code: string }, index: number) => {
         return (
           <div key={index}>
             <h1>{value.name}</h1>
