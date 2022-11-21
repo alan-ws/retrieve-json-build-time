@@ -1,18 +1,4 @@
-export async function memo(key: string, url: string) {
-  let cache: Record<string, any> = {};
-
-  if (key in cache) {
-    console.log("it was cached");
-    return cache[key];
-  }
-
-  console.log("fetched first time");
-  const res = await fetch(url);
-  const data = await res.json();
-  cache[key] = data;
-
-  return data;
-}
+import { memo } from "..";
 
 export async function getStaticProps() {
   // Call an external API endpoint to get data.
